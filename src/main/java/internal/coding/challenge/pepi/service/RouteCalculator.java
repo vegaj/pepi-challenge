@@ -24,7 +24,7 @@ public class RouteCalculator {
             (a, b) -> b.getTotalScore() - a.getTotalScore()
     );
 
-    TravelCosts costs = null;
+    TravelCosts travels = null;
     RouteHeuristic heuristic = null;
 
     public Route calculateOptimalRoute(@NotNull Roadmap roadmap, @NotNull @Min(2) Integer maxRouteLength) {
@@ -32,28 +32,31 @@ public class RouteCalculator {
         //Reset in case of being called multiple times.
         openRoutes.clear();
 
-        this.costs = new TravelCosts(roadmap);
-        this.heuristic = new RouteHeuristic(costs, maxRouteLength);
-
+        //Find the base city from roadmap.
         City base = getBase(roadmap.getCities());
         if (base == null) {
             throw new RuntimeException("Could not find the base city in the given roadmap");
         }
 
+        this.travels = new TravelCosts(roadmap);
+        this.heuristic = new RouteHeuristic(travels, maxRouteLength, base);
+
         //Sets the openRoutes to contain only the base
         openRoutes.add(Route.initial(base.getName()));
+        
         while (!openRoutes.isEmpty()) {
+            
+            //Consider the best route so far 
             Route current = openRoutes.poll();
 
             if (isSolution(current, maxRouteLength)) {
                 solutions.add(current);
-                //Retain only those pending routes that can still improve the score.
-                //openRoutes.removeIf(r -> r.compareTo(current) < 0);
             } else {
                 //Explore new routes.
                 Set<Route> newRoutes = heuristic.getPossibleNextSteps(roadmap, current);
                 openRoutes.addAll(newRoutes);
             }
+            
         }
 
         if (solutions.isEmpty()) { //No solution found
@@ -76,7 +79,6 @@ public class RouteCalculator {
         List<String> cityNames = r.getCities();
         String first = cityNames.get(0), last = cityNames.get(cityNames.size() - 1);
         return r.getLength() > 1 && r.getLength() <= maxTravel && first.equals(last);
-
     }
 
     private City getBase(Collection<City> cities) {
@@ -107,10 +109,10 @@ public class RouteCalculator {
             });
         }
 
-        public Integer getCost(String a, String b) {
+        public Integer getTravelCost(String a, String b) {
             return costs.get(a).getOrDefault(b, Integer.MAX_VALUE);
         }
-        
+
         public boolean canTravel(String a, String b) {
             return costs.get(a).containsKey(b);
         }

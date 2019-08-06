@@ -6,20 +6,11 @@
 package internal.coding.challenge.pepi.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import internal.coding.challenge.pepi.domain.City;
-import internal.coding.challenge.pepi.domain.Connection;
 import internal.coding.challenge.pepi.domain.Roadmap;
-import internal.coding.challenge.pepi.domain.Route;
 import java.io.File;
 import java.io.IOException;
-import java.util.Set;
-import java.util.TreeSet;
-import jdk.dynalink.linker.support.CompositeTypeBasedGuardingDynamicLinker;
-import org.assertj.core.util.Arrays;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -50,11 +41,11 @@ public class RouteCalculatorTest {
         Roadmap roadmap = parser.parse(exercise1());
 
         RouteCalculator rc = new RouteCalculator();
-        rc.costs = rc.new TravelCosts(roadmap);
+        rc.travels = rc.new TravelCosts(roadmap);
 
         assertTrue(roadmap.getCities().stream()
                 .allMatch(c1 -> {
-                    return roadmap.getCities().stream().allMatch(c2 -> rc.costs.getCost(c1.getName(), c2.getName()).equals(rc.costs.getCost(c2.getName(), c1.getName())));
+                    return roadmap.getCities().stream().allMatch(c2 -> rc.travels.getTravelCost(c1.getName(), c2.getName()).equals(rc.travels.getTravelCost(c2.getName(), c1.getName())));
                 }));
     }
 

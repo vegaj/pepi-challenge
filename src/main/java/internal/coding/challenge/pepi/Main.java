@@ -14,7 +14,7 @@ import internal.coding.challenge.pepi.service.RouteCalculator;
 
 public class Main {
 
-    private static Logger LOG = Logger.getLogger("Main");
+    private static final Logger LOG = Logger.getLogger("Main");
 
     public static void main(String... args) {
 
@@ -26,7 +26,7 @@ public class Main {
 
             File roadmapFile = new File(args[0]);
             Integer maxDuration = Integer.parseInt(args[1]);
-
+            
             Route route = getRouteCalculator().calculateOptimalRoute(
                             getRoadmapParser().parse(roadmapFile), maxDuration);
 
