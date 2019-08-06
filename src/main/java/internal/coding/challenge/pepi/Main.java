@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import internal.coding.challenge.pepi.domain.Route;
 import internal.coding.challenge.pepi.service.RoadmapParser;
 import internal.coding.challenge.pepi.service.RouteCalculator;
+import java.util.Optional;
 
 public class Main {
 
@@ -27,11 +28,16 @@ public class Main {
             File roadmapFile = new File(args[0]);
             Integer maxDuration = Integer.parseInt(args[1]);
 
-            Route route = getRouteCalculator().calculateOptimalRoute(
-                    getRoadmapParser().parse(roadmapFile), maxDuration).get();
+            Optional<Route> optRoute = getRouteCalculator().calculateOptimalRoute(
+                    getRoadmapParser().parse(roadmapFile), maxDuration);
 
-            LOG.info(() -> String.format("Score: %s (%s - %s). Route: %s",
-                    route.getTotalScore(), route.getTotalReward(), route.getTotalCost(), route.getCities()));
+            if (optRoute.isPresent()) {
+                Route route = optRoute.get();
+                LOG.info(() -> String.format("Score: %s (%s - %s). Route: %s",
+                        route.getTotalScore(), route.getTotalReward(), route.getTotalCost(), route.getCities()));
+            } else {
+                LOG.warning("We could not find a route that solves this problem");
+            }
 
         } catch (IOException ex) {
             LOG.severe(() -> String.format("ERROR reading input file: [%s] %s", ex.getClass().getSimpleName(), ex.getMessage()));
