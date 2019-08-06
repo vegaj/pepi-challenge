@@ -1,0 +1,22 @@
+
+{
+    "cities": [
+      {
+        "name": "Base",
+        "base": true,
+        "reward": 0
+      },{
+          "name" : "Dest",
+            "base":false,
+            "reward": 5
+        }
+    ],
+    "connections": [
+      {
+        "from": "Base",
+        "to": "Dest",
+        "cost": 5
+      }
+    ]
+}
+

@@ -26,9 +26,9 @@ public class Main {
 
             File roadmapFile = new File(args[0]);
             Integer maxDuration = Integer.parseInt(args[1]);
-            
+
             Route route = getRouteCalculator().calculateOptimalRoute(
-                            getRoadmapParser().parse(roadmapFile), maxDuration);
+                    getRoadmapParser().parse(roadmapFile), maxDuration).get();
 
             LOG.info(() -> String.format("Score: %s (%s - %s). Route: %s",
                     route.getTotalScore(), route.getTotalReward(), route.getTotalCost(), route.getCities()));

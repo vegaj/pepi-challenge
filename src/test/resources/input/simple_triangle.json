@@ -1,0 +1,69 @@
+
+{
+    "cities": [
+        {
+            "name": "A",
+            "base": true,
+            "reward": 0
+        }, {
+            "name": "B",
+            "reward": 2
+        },
+        {
+            "name": "C",
+            "reward": 2
+        },
+        {
+            "name": "D",
+            "reward": 2
+        },
+        {
+            "name": "E",
+            "reward": 2
+        }
+
+    ],
+    "connections": [
+        {
+            "from": "A",
+            "to": "B",
+            "cost": 1
+        },
+        {
+            "from": "A",
+            "to": "C",
+            "cost": 1
+        },
+        {
+            "from": "B",
+            "to": "C",
+            "cost": 1
+        },
+        {
+            "from": "B",
+            "to": "D",
+            "cost": 1
+        },
+        {
+            "from": "D",
+            "to": "C",
+            "cost": 1
+        },
+        {
+            "from": "B",
+            "to": "C",
+            "cost": 1
+        },
+        {
+            "from": "D",
+            "to": "E",
+            "cost": 1
+        },
+        {
+            "from": "E",
+            "to": "C",
+            "cost": 1
+        }
+    ]
+}
+
