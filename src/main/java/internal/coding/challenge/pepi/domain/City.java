@@ -37,4 +37,11 @@ public class City {
     public void setBase(Boolean base) {
         this.base = base;
     }
+
+    @Override
+    public String toString() {
+        return (base?"(B) " : "") + name; 
+    }
+    
+    
 }

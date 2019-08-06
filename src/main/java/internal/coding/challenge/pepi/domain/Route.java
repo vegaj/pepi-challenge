@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.validation.constraints.NotNull;
 
-public class Route {
+public class Route implements Comparable<Route> {
 
     @NotNull
     private final List<String> cities;
@@ -55,4 +55,16 @@ public class Route {
     public Integer getTotalReward() {
         return totalReward;
     }
+
+    @Override
+    public int compareTo(Route o) {
+        return this.getTotalScore() - o.getTotalScore();
+    }
+
+    @Override
+    public String toString() {
+        return "(" + getTotalScore() + ") " + cities.toString();
+    }
+    
+    
 }
