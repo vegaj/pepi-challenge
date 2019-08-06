@@ -1,0 +1,36 @@
+{
+    "cities": [
+        {
+            "name": "A",
+            "reward": 10
+        }, {
+            "name": "B",
+            "reward": 10
+        },
+        {
+            "name": "C",
+            "reward": 10
+        },
+        {
+            "name": "X",
+            "reward": 0,
+            "base": true
+        }
+    ],
+    "connections": [
+        {
+            "from": "X",
+            "to": "A",
+            "cost": 1
+        },
+        {
+            "from": "A",
+            "to": "B",
+            "cost": 1
+        }, {
+            "from": "A",
+            "to": "C",
+            "cost": 1
+        }]
+}
+

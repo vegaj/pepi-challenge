@@ -16,6 +16,9 @@ import java.util.Set;
 
 public class RouteCalculator {
 
+    //Defined as requirements
+    private static final int MAX_ROUTE_LENGTH = 7;
+
     //Peek for the most valuable
     private final PriorityQueue<Route> openRoutes = new PriorityQueue<>(
             (a, b) -> b.getTotalScore() - a.getTotalScore()
@@ -33,6 +36,10 @@ public class RouteCalculator {
         //Reset in case of being called multiple times.
         openRoutes.clear();
         solutions.clear();
+
+        if (maxRouteLength > MAX_ROUTE_LENGTH) {
+            throw new IllegalArgumentException("the route length can't exceed the maximum number of days (" + MAX_ROUTE_LENGTH + ")");
+        }
 
         //Find the base city from roadmap.
         City base = getBase(roadmap.getCities());

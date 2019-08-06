@@ -26,8 +26,9 @@ public class RouteExplorer {
     /**
      * Creates a RouteExplorer to be used to give a set of possible destinations
      * to the RouteCalculator
-     * 
-     * @param costs a TravelCosts that determines the penalty for moving between two cities.
+     *
+     * @param costs a TravelCosts that determines the penalty for moving between
+     * two cities.
      * @param maxDuration the maximum number of cities that can be visited.
      * @param base the city every route must end at.
      */
@@ -77,14 +78,18 @@ public class RouteExplorer {
             }
             return res;
         }
-
+        
         return map.getCities().stream()
                 //Consider the pending to visit and the base
-                .filter((City c) -> !r.getCities().contains(c.getName()) || c.getBase())
+                //.filter((City c) -> !r.getCities().contains(c.getName()) || c.getBase())
                 //Remove the ones that are not connected to the current city
                 .filter((City c) -> travels.canTravelBetween(current, c.getName()))
                 //Create a new rute per candidate city with the costs and the awards
-                .map((City c) -> r.withNextStep(c.getName(), travels.getTravelCost(current, c.getName()), c.getReward()))
+                .map((City c)-> r.withNextStep(
+                        c.getName(),
+                        travels.getTravelCost(current, c.getName()),
+                        r.getCities().contains(c.getName()) ? 0 : c.getReward())
+                )
                 .collect(toSet());
     }
 }

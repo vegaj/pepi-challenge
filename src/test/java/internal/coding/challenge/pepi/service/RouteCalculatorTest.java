@@ -33,7 +33,7 @@ public class RouteCalculatorTest {
      */
     @Test
     public void test_highest_score_is_zero() throws IOException {
-        Route solution = routeCalculator.calculateOptimalRoute(roadmapParser.parse(zeroScore()), 8).get();
+        Route solution = routeCalculator.calculateOptimalRoute(roadmapParser.parse(zeroScore()), 7).get();
 
         assertThat(solution.getCities()).contains("Base", "Dest").endsWith("Base");
 
@@ -68,8 +68,8 @@ public class RouteCalculatorTest {
         assertThat(solution.getTotalReward()).isEqualTo(6);
         assertThat(solution.getTotalScore()).isEqualTo(2);
     }
-    
-      @Test
+
+    @Test
     public void test_simple_triangle_large_route() throws IOException {
         Route solution = routeCalculator.calculateOptimalRoute(roadmapParser.parse(simpleTriangle()), 5).get();
         assertThat(solution.getCities()).isIn(
@@ -79,6 +79,23 @@ public class RouteCalculatorTest {
         assertThat(solution.getTotalCost()).isEqualTo(5);
         assertThat(solution.getTotalReward()).isEqualTo(8);
         assertThat(solution.getTotalScore()).isEqualTo(3);
+    }
+
+    @Test
+    public void test_steps_over_A_multiple_times() throws IOException {
+        Route solution = routeCalculator.calculateOptimalRoute(roadmapParser.parse(getStar()), 6).get();
+        assertThat(solution.getCities()).isIn(
+                List.of("X", "A", "B", "A", "C", "A", "X"),
+                List.of("X", "A", "C", "A", "B", "A", "X")
+        );
+        
+        assertThat(solution.getTotalCost()).isEqualTo(6);
+        assertThat(solution.getTotalReward()).isEqualTo(30);
+        assertThat(solution.getTotalScore()).isEqualTo(24);
+    }
+
+    private File getStar() {
+        return getFileInClasspath("input/star.json");
     }
 
     private File zeroScore() {

@@ -33,10 +33,10 @@ public class AppTest {
         assertThat(solution.getTotalScore()).isEqualTo(97);
     }
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void test_givenMaxLength8_whenCalculate_thenOptimalRouteIsFound() throws IOException {
         Route solution = routeCalculator.calculateOptimalRoute(roadmapParser.parse(exercise1()), 8).get();
-
+        
         assertThat(solution.getCities()).isIn(
                 List.of("Madrid", "Rome", "Berlin", "Warsaw", "Kyiv", "Moscow", "London", "Paris", "Madrid"),
                 List.of("Madrid", "Paris", "London", "Moscow", "Kyiv", "Warsaw", "Berlin", "Rome", "Madrid"));
