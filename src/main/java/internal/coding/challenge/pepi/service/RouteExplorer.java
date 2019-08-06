@@ -80,8 +80,6 @@ public class RouteExplorer {
         }
         
         return map.getCities().stream()
-                //Consider the pending to visit and the base
-                //.filter((City c) -> !r.getCities().contains(c.getName()) || c.getBase())
                 //Remove the ones that are not connected to the current city
                 .filter((City c) -> travels.canTravelBetween(current, c.getName()))
                 //Create a new rute per candidate city with the costs and the awards

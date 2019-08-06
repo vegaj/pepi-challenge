@@ -35,8 +35,12 @@ public class AppTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void test_givenMaxLength8_whenCalculate_thenOptimalRouteIsFound() throws IOException {
+
         Route solution = routeCalculator.calculateOptimalRoute(roadmapParser.parse(exercise1()), 8).get();
-        
+
+        //Should fail because of the rule
+        //"Your trip is a week long; the route length can’t exceed the maximum number of days (7)."
+        /*
         assertThat(solution.getCities()).isIn(
                 List.of("Madrid", "Rome", "Berlin", "Warsaw", "Kyiv", "Moscow", "London", "Paris", "Madrid"),
                 List.of("Madrid", "Paris", "London", "Moscow", "Kyiv", "Warsaw", "Berlin", "Rome", "Madrid"));
@@ -44,6 +48,7 @@ public class AppTest {
         assertThat(solution.getTotalCost()).isEqualTo(108);
         assertThat(solution.getTotalReward()).isEqualTo(233);
         assertThat(solution.getTotalScore()).isEqualTo(125);
+         */
     }
 
     private File exercise1() {

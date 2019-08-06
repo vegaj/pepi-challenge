@@ -7,6 +7,7 @@ import javax.validation.constraints.NotNull;
 import internal.coding.challenge.pepi.domain.Roadmap;
 import internal.coding.challenge.pepi.domain.Route;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,16 +17,16 @@ import java.util.Set;
 
 public class RouteCalculator {
 
-    //Defined as requirements
+    //Defined in the rules
     private static final int MAX_ROUTE_LENGTH = 7;
 
     //Peek for the most valuable
     private final PriorityQueue<Route> openRoutes = new PriorityQueue<>(
-            (a, b) -> b.getTotalScore() - a.getTotalScore()
+            Comparator.reverseOrder()
     );
 
     private final PriorityQueue<Route> solutions = new PriorityQueue<>(
-            (a, b) -> b.getTotalScore() - a.getTotalScore()
+            Comparator.reverseOrder()
     );
 
     private TravelCosts travels;
@@ -77,10 +78,8 @@ public class RouteCalculator {
         return solutions.stream()
                 //We consider only the solutions with the highest score.
                 .filter(r -> r.getTotalScore() == top.getTotalScore())
-                //Then we sort them attending to the route length
-                .sorted((a, b) -> a.getLength() - b.getLength())
-                //Take the shortest
-                .findFirst();
+                //Then we sort them attending to the route length and take the smallest
+                .min(Comparator.comparingInt(Route::getLength));
     }
 
     private boolean isSolution(Route r, int maxTravel) {
