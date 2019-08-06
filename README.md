@@ -19,6 +19,6 @@ In order to be able to run this project, you will need:
 
 In the same directory run:
 ```
-java -jar poker-travels-{version}-jar-with-dependencies.jar <input_file.json> <max_days>
+java -jar target/poker-travels-{version}-jar-with-dependencies.jar <input_file.json> <max_days>
 ```
 Where __<input_file.json>__ is a JSON file containing the cities, the awards and the connection between cities and their costs; and __<max_days>__ is the maxium number of days the travel can last (this is an integer between 2 and 7 inclusive).
