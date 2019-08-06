@@ -10,12 +10,14 @@
     <name>The Workshop P.E.P.I. Coding Challenge</name>
     <description>A solution for the P.E.P.I. coding challenge. See README</description>
 
-    <scm>
-        <url>https://github.com/The-Workshop-Inventors-of-play/pepi-challenge.git</url>
-        <connection>scm:git:https://github.com/The-Workshop-Inventors-of-play/pepi-challenge.git</connection>
-        <developerConnection>scm:git:https://github.com/The-Workshop-Inventors-of-play/pepi-challenge.git</developerConnection>
-        <tag>master</tag>
-    </scm>
+    <!--
+        <scm>
+            <url>https://github.com/The-Workshop-Inventors-of-play/pepi-challenge.git</url>
+            <connection>scm:git:https://github.com/The-Workshop-Inventors-of-play/pepi-challenge.git</connection>
+            <developerConnection>scm:git:https://github.com/The-Workshop-Inventors-of-play/pepi-challenge.git</developerConnection>
+            <tag>master</tag>
+        </scm>
+    -->
 
     <properties>
         <java.version>10</java.version>
